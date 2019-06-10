@@ -21,6 +21,8 @@ node index.js
 ## 插件解读
 
 1. `config-lite`是一个轻量的读取配置文件的模块
+2. `mongolass`是 MongoDB 的驱动库
+3. `express-formidable`是处理 form 表单(包括文件上传)
 
 ## 模板引擎(ejs)
 
@@ -33,6 +35,10 @@ node index.js
 ## 中间件
 
 > `express`中的中间件就是用来处理请求的，当一个中间件处理完，可以通过调用`next()`传递给下一个中间件，如果没有调用`next()`,则请求不会往下传递，如内置的`res.render`其实就是渲染完 html 直接返回客户端，没有调用`next()`，从而没有传递给下一个中间件
+
+## app.locals 和 res.locals
+
+> `express` 中的两个对象，可以用于模板的渲染。`app.locals`常用于挂载常量的信息，`res.locals`通常用于挂载变量的信息，即每次请求可能不一样的值
 
 ## 功能及路由设计
 

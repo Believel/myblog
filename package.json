@@ -1,7 +1,7 @@
 {
   "name": "myblog",
   "version": "1.0.0",
-  "description": "",
+  "description": "My first blog",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
