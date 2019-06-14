@@ -50,3 +50,28 @@ exports.User.index({
 }, {
   unique: true
 }).exec()
+
+// 文章
+exports.Post = mongolass.model('Post', {
+  author: {
+    type: Mongolass.Types.ObjectId,
+    required: true
+  },
+  title: {
+    type: 'string',
+    required: true
+  },
+  content: {
+    type: 'string',
+    required: true
+  },
+  pv: {
+    type: 'number',
+    defalut: 0
+  }
+})
+// 按创建时间降序查看用户的文章列表
+exports.Post.index({
+  author: 1,
+  _id: -1
+}).exec()
