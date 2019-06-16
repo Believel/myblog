@@ -11,18 +11,26 @@ node index.js
 
 ## 目录说明
 
-1. `models`:存放操作数据库的文件
-2. `public`:存放静态文件，如样式、图片等
-3. `routes`:存放路由文件
-4. `views`:存放模板文件
-5. `index.js`:程序主文件
-6. `package.json`:存储项目名、描述、作者、依赖等等信息
+1. `config`: 存放配置信息(session,mongodb 连接)
+2. `coverage`: 测试代码的覆盖文件
+3. `libs`: 存放 mongodb 的集合信息
+4. `logs`: 存放日志文件
+5. `middlewares`: 存放了 express 的中间件
+6. `models`:存放操作数据库的文件
+7. `public`:存放静态文件，如样式、图片等
+8. `routes`:存放路由文件
+9. `test`: 存放测试文件
+10. `views`:存放模板文件
+11. `index.js`:程序主文件
+12. `package.json`:存储项目名、描述、作者、依赖等等信息
 
 ## 插件解读
 
 1. `config-lite`是一个轻量的读取配置文件的模块
 2. `mongolass`是 MongoDB 的驱动库
 3. `express-formidable`是处理 form 表单(包括文件上传)
+4. `winston`和`express-winston`用来记录日志
+5. `mocha`和`supertest`用来测试
 
 ## 模板引擎(ejs)
 

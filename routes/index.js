@@ -13,4 +13,10 @@ module.exports = function (app) {
   // 留言
   app.use('/comments', require('./comments'))
 
+  app.use(function (req, res) {
+    if (!res.headersSent) {
+      res.status(404).render('404')
+    }
+  })
+
 }

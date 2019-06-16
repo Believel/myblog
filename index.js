@@ -6,6 +6,8 @@ const flash = require("connect-flash");
 const config = require("config-lite")(__dirname);
 const routes = require("./routes");
 const pkg = require("./package");
+const winston = require('winston')
+const expressWinston = require('express-winston')
 const formidableMiddleware = require('express-formidable');
 
 const app = express();
@@ -56,10 +58,47 @@ app.use(function (req, res, next) {
   next()
 })
 
+// 请求正常的日志
+app.use(expressWinston.logger({
+  transports: [
+    new(winston.transports.Console)({
+      json: true,
+      colorize: true
+    }),
+    new winston.transports.File({
+      filename: 'logs/success.log'
+    })
+  ]
+}))
 // 路由
 routes(app);
 
-//  监听端口， 启动程序
-app.listen(config.port, function () {
-  console.log(`${pkg.name} listening on port ${config.port}`);
-});
+// 请求错误的日志
+app.use(expressWinston.errorLogger({
+  transports: [
+    new(winston.transports.Console)({
+      json: true,
+      colorize: true
+    }),
+    new winston.transports.File({
+      filename: 'logs/error.log'
+    })
+  ]
+}))
+
+// 内置错误页面通知复用
+app.use(function (err, req, res, next) {
+  console.error(err)
+  req.flash('error', err.message)
+  res.redirect('/posts')
+})
+
+if (module.parent) {
+  // 被require,则导出app
+  module.exports = app
+} else {
+  // 监听端口， 启动程序
+  app.listen(config.port, function () {
+    console.log(`${pkg.name} listening on port ${config.port}`);
+  });
+}
